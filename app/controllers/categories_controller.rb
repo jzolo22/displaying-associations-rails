@@ -2,9 +2,10 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
   end
-
+  
   def show
     @category = Category.find(params[:id])
+    @posts = Post.all.select {|post| post.category == @category}
   end
 
   def new
@@ -25,6 +26,8 @@ class CategoriesController < ApplicationController
     category.update(category_params)
     redirect_to category_path(category)
   end
+
+
 
   private
 
